@@ -5,4 +5,4 @@ The _"A Bit of Computer Science"_ section is part of the JavaScript course in Th
 ## Projects Completed
 
 1. **[Recursion](https://www.theodinproject.com/lessons/javascript-recursion)**  
-   In this first project, I explored two classic problems that leverage the concept of recursion: **Fibonacci** and **Merge Sort (NOT DONE YET LOL)**.
+   In this first project, I explored two classic problems that leverage the concept of recursion: **Fibonacci** and **Merge Sort**.
