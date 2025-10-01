@@ -90,7 +90,7 @@ class Tree {
 
             // CASE 3: NODE HAS TWO CHILDREN
             else {
-                const temp = this.findMaxInASubtree(node.left);
+                const temp = this.findMaxInTheRightSubtree(node.left);
                 node.value = temp.value;
                 node.left = this.deleteItem(temp.value, node.left);
             }
@@ -99,7 +99,7 @@ class Tree {
         return node;
     }
 
-    findMaxInASubtree(node) {
+    findMaxInTheRightSubtree(node) {
         while (node.right !== null) {
             node = node.right;
         }
