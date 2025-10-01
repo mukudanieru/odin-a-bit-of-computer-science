@@ -99,16 +99,23 @@ class Tree {
         return node;
     }
 
-    findMaxInASubtree(node, max = -Infinity) {
-        if (node.right === null) {
-            return node;
+    findMaxInASubtree(node) {
+        while (node.right !== null) {
+            node = node.right;
+        }
+        return node;
+    }
+
+    find(value, node = this.root) {
+        if (node === null) return null;
+
+        if (value < node.value) {
+            return this.find(value, node.left);
+        } else if (value > node.value) {
+            return this.find(value, node.right);
         }
 
-        if (node.value > max) {
-            max = node.value;
-        }
-
-        return this.findMaxInASubtree(node.right, max);
+        return node;
     }
 }
 
@@ -116,3 +123,5 @@ const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 
 const tree = new Tree();
 prettyPrint(tree.buildTree(arr));
+
+console.log(tree.find(3));
