@@ -65,13 +65,54 @@ class Tree {
         return node;
     }
 
-    deleteItem(value) {}
+    deleteItem(value, node = this.root) {
+        if (node === null) return;
+
+        if (value < node.value) {
+            node.left = this.deleteItem(value, node.left);
+        } else if (value > node.value) {
+            node.right = this.deleteItem(value, node.right);
+        }
+
+        // FOUND THE NODE TO DELETE!
+        else {
+            // CASE 1: LEAF NODE (no children)
+            if (node.left === null && node.right === null) {
+                return null;
+            }
+
+            // CASE 2: NODE HAS ONE CHILD
+            else if (node.right === null) {
+                return node.left;
+            } else if (node.left === null) {
+                return node.right;
+            }
+
+            // CASE 3: NODE HAS TWO CHILDREN
+            else {
+                const temp = this.findMaxInASubtree(node.left);
+                node.value = temp.value;
+                node.left = this.deleteItem(temp.value, node.left);
+            }
+        }
+
+        return node;
+    }
+
+    findMaxInASubtree(node, max = -Infinity) {
+        if (node.right === null) {
+            return node;
+        }
+
+        if (node.value > max) {
+            max = node.value;
+        }
+
+        return this.findMaxInASubtree(node.right, max);
+    }
 }
 
 const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
-// const arr = [7, 6, 5, 4, 3, 2, 1];
 
 const tree = new Tree();
 prettyPrint(tree.buildTree(arr));
-
-prettyPrint(tree.insert(666));
