@@ -160,13 +160,85 @@ class Tree {
 
         this.bfsRecursive(callback, queue);
     }
+
+    preOrderForEach(callback) {
+        if (typeof callback !== "function") {
+            throw new TypeError(
+                `Expected a function as the callback argument, but received ${typeof callback}`
+            );
+        }
+
+        console.log("Pre-Order Traversal:");
+        this.dfsPreOrderRecursive(callback, this.root);
+    }
+
+    dfsPreOrderRecursive(callback, node) {
+        if (node === null) return;
+
+        callback(node.value);
+        this.dfsPreOrderRecursive(callback, node.left);
+        this.dfsPreOrderRecursive(callback, node.right);
+    }
+
+    inOrderForEach(callback) {
+        if (typeof callback !== "function") {
+            throw new TypeError(
+                `Expected a function as the callback argument, but received ${typeof callback}`
+            );
+        }
+
+        console.log("In-Order Traversal:");
+        this.dfsInOrderRecursive(callback, this.root);
+    }
+
+    dfsInOrderRecursive(callback, node) {
+        if (node === null) return;
+
+        this.dfsInOrderRecursive(callback, node.left);
+        callback(node.value);
+        this.dfsInOrderRecursive(callback, node.right);
+    }
+
+    postOrderForEach(callback) {
+        if (typeof callback !== "function") {
+            throw new TypeError(
+                `Expected a function as the callback argument, but received ${typeof callback}`
+            );
+        }
+
+        console.log("Post-Order Traversal:");
+        this.dfsPostOrderRecursive(callback, this.root);
+    }
+
+    dfsPostOrderRecursive(callback, node) {
+        if (node === null) return;
+
+        this.dfsPostOrderRecursive(callback, node.left);
+        this.dfsPostOrderRecursive(callback, node.right);
+        callback(node.value);
+    }
 }
 
-const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
+// const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
+const arr = [3, 5, 7];
 
 const tree = new Tree();
-prettyPrint(tree.buildTree(arr));
+tree.buildTree(arr);
 
-let values = [];
-tree.levelOrderForEach((value) => values.push(value));
-console.log(values); // Output the list of all node values
+tree.insert(2);
+tree.insert(4);
+tree.insert(1);
+
+prettyPrint(tree.root);
+
+let preValues = [];
+tree.preOrderForEach((value) => preValues.push(value));
+console.log(preValues); // [ 5, 3, 2, 1, 4, 7 ]
+
+let inValues = [];
+tree.inOrderForEach((value) => inValues.push(value));
+console.log(inValues); // [ 1, 2, 3, 4, 5, 7 ]
+
+let postValues = [];
+tree.postOrderForEach((value) => postValues.push(value));
+console.log(postValues); // [ 1, 2, 4, 3, 7, 5 ]
