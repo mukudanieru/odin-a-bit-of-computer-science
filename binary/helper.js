@@ -111,7 +111,7 @@ class Stack {
         let pointer = this.head;
 
         while (pointer !== null) {
-            linkedListString += ` (${pointer.data}) -->`;
+            linkedListString += ` (${JSON.stringify(pointer.data)}) -->`;
             pointer = pointer.next;
         }
 

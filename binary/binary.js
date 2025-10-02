@@ -1,4 +1,4 @@
-import { prettyPrint } from "./helper.js";
+import { prettyPrint, Queue } from "./helper.js";
 
 class Node {
     constructor(value) {
@@ -114,12 +114,52 @@ class Tree {
             );
         }
 
-        callback(this.root);
+        const queue = new Queue();
+        queue.enqueue(this.root);
+
+        // Default is iterative, feel free to switch to recursive
+        // Uncomment one of the following lines to choose which traversal method to use:
+
+        // Iterative approach:
+        this.bfsIterative(callback, queue);
+
+        // Recursive approach:
+        // this.bfsRecursive(callback, queue);
     }
 
-    bfsIterative(callback) {}
+    bfsIterative(callback, queue) {
+        if (this.root === null) return;
 
-    bfsRecursive(callback) {}
+        while (!queue.isEmpty()) {
+            let pointer = queue.dequeue();
+            callback(pointer.value);
+
+            if (pointer.left !== null) {
+                queue.enqueue(pointer.left);
+            }
+            if (pointer.right !== null) {
+                queue.enqueue(pointer.right);
+            }
+        }
+    }
+
+    bfsRecursive(callback, queue) {
+        if (this.root === null) return;
+
+        if (queue.isEmpty()) return;
+
+        let pointer = queue.dequeue();
+        callback(pointer.value);
+
+        if (pointer.left !== null) {
+            queue.enqueue(pointer.left);
+        }
+        if (pointer.right !== null) {
+            queue.enqueue(pointer.right);
+        }
+
+        this.bfsRecursive(callback, queue);
+    }
 }
 
 const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
@@ -127,4 +167,6 @@ const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 const tree = new Tree();
 prettyPrint(tree.buildTree(arr));
 
-tree.levelOrderForEach(console.log);
+let values = [];
+tree.levelOrderForEach((value) => values.push(value));
+console.log(values); // Output the list of all node values
