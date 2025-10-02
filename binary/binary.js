@@ -217,28 +217,29 @@ class Tree {
         this.dfsPostOrderRecursive(callback, node.right);
         callback(node.value);
     }
+
+    height(value) {
+        const node = this.find(value, this.root);
+        if (node === null) return -1;
+
+        return this.calculateHeight(node);
+    }
+
+    calculateHeight(node) {
+        if (node === null) return -1;
+
+        const left = this.calculateHeight(node.left);
+        const right = this.calculateHeight(node.right);
+
+        return 1 + Math.max(left, right);
+    }
+
+    depth(value, node = this.root) {}
 }
 
-// const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
-const arr = [3, 5, 7];
+const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 
 const tree = new Tree();
-tree.buildTree(arr);
 
-tree.insert(2);
-tree.insert(4);
-tree.insert(1);
-
-prettyPrint(tree.root);
-
-let preValues = [];
-tree.preOrderForEach((value) => preValues.push(value));
-console.log(preValues); // [ 5, 3, 2, 1, 4, 7 ]
-
-let inValues = [];
-tree.inOrderForEach((value) => inValues.push(value));
-console.log(inValues); // [ 1, 2, 3, 4, 5, 7 ]
-
-let postValues = [];
-tree.postOrderForEach((value) => postValues.push(value));
-console.log(postValues); // [ 1, 2, 4, 3, 7, 5 ]
+prettyPrint(tree.buildTree(arr));
+console.log(tree.height(4));
