@@ -220,7 +220,7 @@ class Tree {
 
     height(value) {
         const node = this.find(value, this.root);
-        if (node === null) return -1;
+        if (node === null) return null;
 
         return this.calculateHeight(node);
     }
@@ -234,7 +234,22 @@ class Tree {
         return 1 + Math.max(left, right);
     }
 
-    depth(value, node = this.root) {}
+    depth(value) {
+        const node = this.find(value);
+        if (node === null) return null;
+
+        return this.calculateDepth(value);
+    }
+
+    calculateDepth(value, node = this.root) {
+        if (value === node.value) return 0;
+
+        if (value < node.value) {
+            return 1 + this.calculateDepth(value, node.left);
+        } else if (value > node.value) {
+            return 1 + this.calculateDepth(value, node.right);
+        }
+    }
 }
 
 const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
@@ -242,4 +257,14 @@ const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 const tree = new Tree();
 
 prettyPrint(tree.buildTree(arr));
-console.log(tree.height(4));
+
+let values = [];
+tree.levelOrderForEach((value) => {
+    values.push(value);
+});
+
+console.log(values);
+
+values.forEach((value) => {
+    console.log(`${value} ${tree.depth(value)}`);
+});
