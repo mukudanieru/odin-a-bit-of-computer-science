@@ -1,4 +1,4 @@
-import { prettyPrint, Queue } from "./helper.js";
+import { Queue } from "./helper.js";
 
 class Node {
     constructor(value) {
@@ -120,6 +120,8 @@ class Tree {
         // Default is iterative, feel free to switch to recursive
         // Uncomment one of the following lines to choose which traversal method to use:
 
+        console.log("\nLevel-Order Traversal: ");
+
         // Iterative approach:
         this.bfsIterative(callback, queue);
 
@@ -168,7 +170,7 @@ class Tree {
             );
         }
 
-        console.log("Pre-Order Traversal:");
+        console.log("\nPre-Order Traversal: ");
         this.dfsPreOrderRecursive(callback, this.root);
     }
 
@@ -187,7 +189,7 @@ class Tree {
             );
         }
 
-        console.log("In-Order Traversal:");
+        console.log("\nIn-Order Traversal: ");
         this.dfsInOrderRecursive(callback, this.root);
     }
 
@@ -206,7 +208,7 @@ class Tree {
             );
         }
 
-        console.log("Post-Order Traversal:");
+        console.log("\nPost-Order Traversal: ");
         this.dfsPostOrderRecursive(callback, this.root);
     }
 
@@ -273,18 +275,15 @@ class Tree {
             return [height, true];
         }
     }
+
+    rebalance() {
+        const arr = [];
+        this.levelOrderForEach((value) => {
+            arr.push(value);
+        });
+
+        this.buildTree(arr);
+    }
 }
 
-// const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
-// const arrOne = [10, 5, 15, 3, 7, 13, 18];
-const arrOne = [10, 5, 15];
-
-const tree = new Tree();
-tree.buildTree(arrOne);
-
-tree.insert(2);
-tree.insert(1);
-
-prettyPrint(tree.root);
-
-console.log(tree.checkBalance());
+export { Tree };

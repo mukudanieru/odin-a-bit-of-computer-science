@@ -134,4 +134,18 @@ function prettyPrint(node, prefix = "", isLeft = true) {
     }
 }
 
-export { Queue, Stack, prettyPrint };
+function getRandomInteger(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function randomNumberArray(size, min = 1, max = 99) {
+    const arr = [];
+
+    for (let i = 0; i < size; i++) {
+        arr.push(getRandomInteger(min, max));
+    }
+
+    return arr;
+}
+
+export { Queue, Stack, prettyPrint, getRandomInteger, randomNumberArray };
