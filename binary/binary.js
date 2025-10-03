@@ -250,21 +250,41 @@ class Tree {
             return 1 + this.calculateDepth(value, node.right);
         }
     }
+
+    isBalanced() {
+        return this.checkBalance()[1];
+    }
+
+    checkBalance(node = this.root) {
+        if (node === null) return [-1, true];
+
+        const left = this.checkBalance(node.left);
+        const right = this.checkBalance(node.right);
+
+        const height = 1 + Math.max(left[0], right[0]);
+
+        if (left[1] === false || right[1] === false) {
+            return [height, false];
+        }
+
+        if (Math.abs(left[0] - right[0]) > 1) {
+            return [height, false];
+        } else {
+            return [height, true];
+        }
+    }
 }
 
-const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
+// const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
+// const arrOne = [10, 5, 15, 3, 7, 13, 18];
+const arrOne = [10, 5, 15];
 
 const tree = new Tree();
+tree.buildTree(arrOne);
 
-prettyPrint(tree.buildTree(arr));
+tree.insert(2);
+tree.insert(1);
 
-let values = [];
-tree.levelOrderForEach((value) => {
-    values.push(value);
-});
+prettyPrint(tree.root);
 
-console.log(values);
-
-values.forEach((value) => {
-    console.log(`${value} ${tree.depth(value)}`);
-});
+console.log(tree.checkBalance());
