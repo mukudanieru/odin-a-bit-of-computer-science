@@ -30,4 +30,15 @@ The _"A Bit of Computer Science"_ section is part of the JavaScript course in Th
     - keys(): return array of all keys
     - values(): return array of all values
     - entries(): return array of key-value pairs
-4. **[Binary Search Tree](https://www.theodinproject.com/lessons/javascript-binary-search-trees)**
+4. **[Binary Search Tree](https://www.theodinproject.com/lessons/javascript-binary-search-trees)**  
+   In this project, I implemented a **Binary Search Tree** from scratch, this my first time working with this data structure, and easily the most challenging project so far. Imeplementing this, I gained an understanding of a tree-based data strtucture, recursive thinking, and how tree balance affects performance.
+    - buildTree(array): construct a BST from an array of values
+    - insert(value): add a new value while maintaining BST rules
+    - deleteItem(value): remove a value and restructure links
+    - find(value): search for a node with a given value
+    - levelOrderForEach(callback): breadth-first traversal with a callback
+    - preOrderForEach(callback), inOrderForEach(callback), postOrderForEach(callback): depth-first traversals with a callback
+    - height(value): compute the height of a given node
+    - depth(value): compute the depth of a given node
+    - isBalanced(): check if the tree is balanced
+    - rebalance(): rebuild the tree into a balanced BST
