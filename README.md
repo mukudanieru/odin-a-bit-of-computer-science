@@ -42,3 +42,7 @@ The _"A Bit of Computer Science"_ section is part of the JavaScript course in Th
     - depth(value): compute the depth of a given node
     - isBalanced(): check if the tree is balanced
     - rebalance(): rebuild the tree into a balanced BST
+5. **[Knights Travails](https://www.theodinproject.com/lessons/javascript-knights-travails)**
+   In this project, I implemented **Knights Travails**, an algorithm that finds the shortest path for a knight on a chessboard from a given starting position to a target position. This was my introduction to applying Breadth-First Search (BFS) on a grid, and it turned out to be one of the most challenging yet enjoyable problems I’ve worked on so far. I built the entire logic without using any adjacency list or matrix, relying purely on coordinate calculations and queue traversal.
+    - bfsKnightPath(startPos, endPos): computes the shortest path using BFS
+    - knightMoves(startPos, endPos): prints the move count and sequence of positions
